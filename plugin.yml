@@ -1,0 +1,56 @@
+name: ExplosiveTraps 
+main: eu.randomcrap.explosivetraps.ExplosiveTraps
+version: 0.6.5
+softdepend: [War, WorldGuard]
+permissions:
+    explosivetraps.*:
+        description: gives access to all ExplosiveTraps actions
+        children:
+            explosivetraps.place: true
+            explosivetraps.setplacingitem: true
+            explosivetraps.settrapblock: true
+            explosivetraps.getproximitytrap: true
+            explosivetraps.getremotetrap: true
+    explosivetraps.place: 
+        description: allows you to place a trap
+        default: true
+    explosivetraps.setplacingitem:
+        description: allows setting proximity placing item 
+        default: op
+    explosivetraps.settrapblock:
+        description: allows setting proximity trap block 
+        default: op
+    explosivetraps.getproximitytrap:
+        description: allows getting proximity traps via command
+        default: op
+    explosivetraps.getremotetrap:
+        description: allows getting remote traps via command
+        default: op
+commands:
+   settrapblock:
+      description: sets trap block (0-255)
+      usage: /<command> <BlockID>
+      permission: <plugin name>.settrapblock
+      permission-message: You don't have <permission> 
+   setplacingitem:
+      description: sets trap placing block
+      usage: /<command> ItemID
+      permission: <plugin name>.setplacingitem
+      permission-message: You don't have <permission>
+      permission: <plugin name>.settrapblock
+      permission-message: You don't have <permission> 
+   setplacingitem:
+      description: sets trap placing block
+      usage: /<command> ItemID
+      permission: <plugin name>.setplacingitem
+      permission-message: You don't have <permission> 
+   getproximitytrap:
+      description: gives you <amount> of proxmity traps
+      usage: /<command> <amount>
+      permission: <plugin name>.getproximitytrap
+      permission-message: You don't have <permission>
+   getremotetrap:
+      description: gives you <amount> of remote traps
+      usage: /<command> <amount>
+      permission: <plugin name>.getremotetrap
+      permission-message: You don't have <permission> 

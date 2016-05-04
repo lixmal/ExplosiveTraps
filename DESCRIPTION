@@ -1,0 +1,160 @@
+== Description
+Adds proximity and remote detonator traps. Proximity traps explode on player or entity contact, remote traps explode on player click. Remote traps have different channels. Has War and WorldGuard support. Fully configurable.
+
+
+
+== Features
+* [[/server-mods/explosivetraps/#w-proximity%20traps|Proximity traps]]
+* [[/server-mods/explosivetraps/#w-remote%20detonator%20traps|Remote detonator traps]]
+* Different channels for remote traps
+* [[http://dev.bukkit.org/server-mods/war/|War]] support
+* WorldGuard support
+* Fully configurable
+* Custom crafting recipes
+* [[/server-mods/explosivetraps/#w-defusing|Defusing]]
+* Basic support for all protection plugins which cancel block placing / block destroying / explosions
+
+
+* Traps will explode after a certain amount of time if noone stepped on it (default 40s, change to 0 for infinity) 
+* Traps don't explode on players if PVP in that world is disabled
+* Traps don't explode on the player who placed the trap (configurable)
+* Setting/destroying traps respect protection plugins
+
+=== Proximity traps
+* Item for playing proximity traps is Firework Star (ID 402) with durability 999. Right-clicking with that item on a block places a trap above
+* Looks like tripwire by default (ID 132)
+* Obaining traps: /getproximitytrap <amount> or crafting (check configuration)
+* Explode if a player steps on it
+* Explode if a entity steps on it (or items are thrown on it, etc). Important: atm this just works with pressure plates and conntected tripwire
+
+
+=== Remote detonator traps
+* Default item for placing remote detonator traps is Nether Star (ID 399) with durability 999. Righ-clicking places a trap.
+* Left-clicking while sneaking detonates all placed traps
+* Looks like a flower pot (ID 140).
+* Obaining traps: /getremotetrap <amount> or crafting (check configuration)
+* Needs at least 2 traps to place traps, last one is always used fo detonating
+* Configurable limit of simultaneously placed traps 
+==== Channels
+* Newly placed traps get the currently selected player channel
+* Shift+rightclick on a placed remote trap to select channel of that trap
+* Shift+rightclick somewhere else to select player (detonator) channel
+* All traps where player channel equals trap channel explode simultaneously
+* Select 'All' player channel to detonate all traps regardless of channel
+* Select 'Single' player channel to detonate traps chronologically one by one regardless of channel
+
+=== WorldGuard support
+* Traps can't be placed/destroyed/defused in regions where the player cannot build
+* Traps can't be placed in regions where 'TNT' flag is disabled
+* Traps don't explode in regions where 'other explosion' flag is disabled
+* Traps don't explode on players in regions where 'PVP' flag is disabled (delayed explosion still happens)
+* Ops can place traps everywhere
+
+
+=== War support
+* Traps don't explode on team players if 'friendly-fire' is off
+* Traps can't be placed on spawn/flag/warhub/etc
+* Traps can be placed in custom loadouts (use configured item ID and configured item durability)
+* Traps don't explode on players in zones where 'PVP' is disabled (delayed explosion still happens)
+
+Precedence of plugins is //Warzone -> WorldGuard region -> World PVP setting// if any conflicts happen
+
+behaviour of traps in respect to explodeOnSelf config option looks like this:
+(true = explodes, false = vanishes)
+
+[code]
+                             teamPlayer    selfInWarzone   selfOutside
+
+selfOff/friendlyFireOn       true             false              false
+selfOn/friendlyFireOff       false            false              true
+selfOn/friendlyFireOn        true             true               true
+selfOff/friendlyFireOff      false            false              false
+
+[/code]
+
+=== Custom crafting recipes
+Check the [[/server-mods/explosivetraps/pages/configuration|configuration]] page for the default recipes.
+Basically you define the recipe by giving one material per slot. You can use as many different materials as you like, you just have to add them to the config. Please remember to follow the list and associatve list YAML syntax or it won't work. For example YAML special characters like "*" or "#" should be quoted:
+<<code>>
+proximityCraftShape:
+  - "X#X"
+  - "#*#"
+  - "X#X"
+
+proximityCraftMaterials:
+
+  "*": 46               # tnt
+  "#": 289              # sulphur
+  X:   1                # stone
+<</code>>
+
+=== Defusing
+
+* If defusingEnabled is true the behaviour of traps changes. Players have to stand near the trap to remove or defuse it (configurable, change to > 4 to disable that feature)
+* If a player attempts to remove a trap without defusing it, it will explode (always, exception: WorldGuard regions with 'other-explosion' flag disabled or other plugins which cancel explosions).
+* Defusing works as following: equip the defusing item and hold right-click on the trap till it is defused
+* If defusing gets interrupted the player has to start over
+* Defused traps can drop the trap with certain chance
+* Can be configured to work only while sneaking
+
+== Commands
+* /setplacingitem <ItemID>
+Changes proximity placing item to <ItemID>
+* /settrapblock    <BlockD>
+Changes proximity trap block to <BlockID>
+* /getproximitytrap <amount>
+Gives you <amount> of proximity traps
+* /getremotetrap <amount>
+Gives you <amount> of remote traps
+
+== Permissions
+* explosivetraps.*:
+ description: gives access to all ExplosiveTraps actions
+* explosivetraps.place: 
+description: allows placing traps
+default: true
+* explosivetraps.setplacingitem:
+description: allows using /setplacingitem 
+default: op
+* explosivetraps.settrapblock:
+description: allows using /settrapblock
+default: op
+* explosivetraps.getproximitytrap:
+ description: allows getting proximity traps via command
+default: op
+* explosivetraps.getremotetrap:
+ description: allows getting remote traps via command
+ default: op
+
+
+== Todo
+
+* add localization
+* add visualization of available channels
+* add kill counter
+* make entity contact work with other blocks
+* add sticky traps, more variants
+* make traps persistent
+* add residence support (partly implemented)
+* make WG non-PVP zones work in War zones
+* add more permissions
+* add more commands for configuration
+
+
+== Caveats
+* Traps are not persistent, they don't work anymore after shutdown, but the blocks are still there
+* Proximiy traps don't work on entities on blocks other than pressure plates and conntected tripwire
+
+== [[/server-mods/explosivetraps/pages/configuration/|Configuration]]
+
+== [[/server-mods/explosivetraps/pages/videos/|Videos]]
+
+v0.6 feature demonstration:
+<<youtube wsDB6IUGZLA>>
+
+check out my other plugin: [url]http://dev.bukkit.org/bukkit-plugins/arrowmux/|ArrowMux[/url]
+
+
+
+== Source
+https://github.com/lixmal/ExplosiveTraps

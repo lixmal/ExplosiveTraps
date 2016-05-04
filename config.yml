@@ -1,0 +1,136 @@
+
+#####    proximity trap  #####
+
+# whether proximity traps explode on player who placed the trap
+# affects player outside of warzones, inside warzone behaviour depends on 'friendly-fire' setting
+explodeOnSelf:    false
+
+# proximity trap explosion power
+explosionPower:   2
+explosionFire:    false
+
+# proximity block trap placing item, firework star by default
+placingItem: 402
+
+# proximity trap block, tripwire by default, use 0 for invisible traps
+trapBlock:        132
+
+# proximity trap placing item durability, use 0 for standard item  
+placingItemDurability: 999
+
+
+
+#####   remote   trap   #####
+
+# remote trap explosion power
+remoteExplosionPower: 2
+
+remoteExplosionFire: false
+
+# remote trap 
+remoteTrapBlock: 140
+
+# remote trap placing item
+remotePlacingItem: 399
+
+# remote trap placing item durability
+remotePlacingItemDurability: 999
+
+# max amount of remote traps a player can place, 0 for infinity
+remoteMaxTraps: 3
+
+# whether player has to sneak to detonate traps
+remoteSneaking: true
+
+# dye or wool
+channelSelectorStyle: dye
+
+##### delayed explosion #####
+
+# exploding delay after a trap was placed in seconds, 0 for infinity
+explodeDelay:     40
+
+explosionDelayPower: 1
+explosionDelayFire: true
+
+# set to false to completely turn off explosions in WorldGuard regions where 'other-explosion' flag is set
+explodeInWG: true
+
+
+#####     defusing     #####
+
+# whether defusing is enabled
+# if true traps will explode if someone tries to destroy them without defusing
+defuseEnabled: true
+
+# maximum distance you can stand away to break/defuse trap
+defuseDistance: 3
+
+# item used for defusing traps, shears (359) by default
+defuseItem: 359
+
+# if this durability is reached the item will break, 239 (shears maximum) by default
+# only works if cosumeDefuseItem is true
+defuseItemDurabilityBreak: 239
+
+# explosion power of destroyed traps 
+defuseExplosionPower: 2.5
+
+# time needed to defuse a trap in seconds, set to 0 for instant defuse
+defuseTime: 5
+
+# whether player has to sneak while defusing
+defuseSneaking: false   
+
+# whether traps drop the trap on successful defuse
+defuseDropTrap: true
+
+# drop chance in %
+defuseDropTrapChance: 70
+
+# tolerance between defusing steps in ticks. Increase if server lags
+defuseTickTolerance: 6
+
+# true: display bar, false: displays percentage
+defuseDisplayBar: true
+
+
+
+
+# whether placing traps consumes the placing item (stack)
+consumePlacingItem: true
+
+# whether durability changes while defusing traps
+consumeDefuseItem: true 
+
+# whether traps explode when a trap gets damaged by explosion
+chainRections: true
+
+
+#####    crafting    #####
+
+# proximity trap crafting shape in crafting table, each (arbitrary) symbol represents one material
+proximityCraftShape: 
+  - " B "
+  - "BAB"
+  - " B "
+
+# which symbol represent which material
+proximityCraftMaterials:
+  A: 46               # tnt
+  B: 289              # sulphur
+
+# amount of traps you get from crafting
+proximityCraftAmount: 3
+
+
+remoteCraftShape: 
+  - " B "
+  - "BAB"
+  - " B "
+
+remoteCraftMaterials:
+  A: 390               # flower pot
+  B: 289               # sulphur
+
+remoteCraftAmount: 4
