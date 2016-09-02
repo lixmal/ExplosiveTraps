@@ -36,13 +36,6 @@ commands:
       description: sets trap placing block
       usage: /<command> ItemID
       permission: <plugin name>.setplacingitem
-      permission-message: You don't have <permission>
-      permission: <plugin name>.settrapblock
-      permission-message: You don't have <permission> 
-   setplacingitem:
-      description: sets trap placing block
-      usage: /<command> ItemID
-      permission: <plugin name>.setplacingitem
       permission-message: You don't have <permission> 
    getproximitytrap:
       description: gives you <amount> of proxmity traps
